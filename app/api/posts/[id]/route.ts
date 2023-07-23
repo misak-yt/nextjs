@@ -2,7 +2,9 @@ import { NextResponse } from 'next/server'
 
 const api = "https://jsonplaceholder.typicode.com/posts/"
 
-export async function GET(request: Request, { params }) {
+export async function GET(request: Request, { params }: {
+	params: { id: string }
+}) {
 	console.log(params);
 
 	const res = await fetch(api + params.id);
@@ -11,7 +13,11 @@ export async function GET(request: Request, { params }) {
 	return new NextResponse(JSON.stringify(data));
 }
 
-export async function POST(request: Request, { params }) {
+export async function POST(request: Request, { params }: {
+	params: {
+		[x: string]: string
+	}
+}) {
 	fetch(api, {
 		method: 'POST',
 		body: JSON.stringify({
@@ -25,15 +31,23 @@ export async function POST(request: Request, { params }) {
 	})
 }
 
-export async function DELETE(request: Request, { params }) {
+export async function DELETE(request: Request, { params }: {
+	params: { id: string }
+}) {
 
 }
 
-export async function PUT(request: Request, { params }) {
+export async function PUT(request: Request, { params }: {
+	params: { id: string }
+}) {
 
 }
 
-export async function PATCH(request: Request, { params }) {
+export async function PATCH(request: Request, { params }: {
+	params: {
+		[x: string]: string
+	}
+}) {
 	fetch(api + params.id, {
 		method: 'PATCH',
 		body: JSON.stringify({
